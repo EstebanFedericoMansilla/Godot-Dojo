@@ -258,6 +258,11 @@ function renderMap() {
 
     document.getElementById('gems-count').innerText = gems;
     document.getElementById('streak-count').innerText = streak;
+    if (isPro) {
+        document.getElementById('pro-status-tag').classList.remove('hidden');
+        document.querySelector('.pro-badge').innerText = "PRO ACTIVE";
+        document.querySelector('.pro-badge').style.opacity = "0.7";
+    }
 
     let firstIncomplete = levelsData.findIndex((_, idx) => !completedLevels.includes(idx));
     if (firstIncomplete === -1) firstIncomplete = 159;
@@ -380,6 +385,32 @@ function resetLessonUI() {
     document.getElementById('progress-bar').style.width = ((currentPlayingLevel / levelsData.length) * 100) + "%";
 }
 
+// --- PRO MODE / URL CLEANER ---
+const SECRET_KEY = 'cliente_vip_enero_2026';
+const urlParams = new URLSearchParams(window.location.search);
+
+function activatePro(silent = false) {
+    isPro = true;
+    localStorage.setItem('godot_dojo_pro_link', SECRET_KEY);
+    // Also update global save object
+    const currentSave = JSON.parse(localStorage.getItem('godotDojoMaster') || '{}');
+    currentSave.p = true;
+    localStorage.setItem('godotDojoMaster', JSON.stringify(currentSave));
+
+    if (!silent) {
+        alert("✅ ¡Modo PRO Activado!");
+        location.reload();
+    }
+}
+
+if (urlParams.get('access') === SECRET_KEY) {
+    activatePro(true);
+    window.history.replaceState({}, document.title, window.location.pathname);
+    setTimeout(() => alert("¡Pago confirmado! Modo PRO desbloqueado por 30 días."), 500);
+}
+
+if (localStorage.getItem('godot_dojo_pro_link') === SECRET_KEY) isPro = true;
+
 // EVENTS
 document.getElementById('start-quiz-btn').onclick = startQuiz;
 document.getElementById('back-to-map-btn').onclick = () => {
@@ -398,12 +429,48 @@ document.getElementById('exit-lesson-btn').onclick = () => {
 };
 document.getElementById('save-btn').onclick = () => {
     localStorage.setItem('godotDojoMaster', JSON.stringify({ c: completedLevels, g: gems, s: streak, p: isPro }));
-    alert("¡Guardado!");
+    alert("¡Progreso Guardado!");
 };
 document.getElementById('reset-btn').onclick = () => {
-    if (confirm("Reiniciar?")) { completedLevels = []; gems = 0; streak = 0; isPro = false; localStorage.removeItem('godotDojoMaster'); renderMap(); }
+    if (confirm("¿Reiniciar progreso?")) {
+        completedLevels = []; gems = 0; streak = 0; isPro = false;
+        localStorage.removeItem('godotDojoMaster');
+        localStorage.removeItem('godot_dojo_pro_link');
+        renderMap();
+        location.reload();
+    }
 };
-document.querySelector('.pro-badge').onclick = () => { isPro = true; alert("Modo PRO activado."); renderMap(); };
+
+// --- PAYMENT MODAL LOGIC ---
+const payModal = document.getElementById('payment-modal');
+const openPay = () => { SFX.click(); payModal.classList.remove('hidden'); };
+const closePay = () => { payModal.classList.add('hidden'); };
+
+document.querySelector('.pro-badge').onclick = openPay;
+document.querySelector('.close-modal-pay').onclick = closePay;
+window.onclick = (e) => { if (e.target === payModal) closePay(); };
+
+window.copyMPLink = () => {
+    navigator.clipboard.writeText('https://mpago.la/1hAUANX').then(() => {
+        alert("Link copiado. ¡Pégalo en tu navegador al terminar el pago!");
+    });
+};
+
+document.getElementById('verify-code-btn').onclick = () => {
+    let input = document.getElementById('manual-code-input').value.trim();
+    if (!input) return;
+
+    if (input.includes('access=')) {
+        const match = input.match(/access=([^&]*)/);
+        if (match) input = match[1];
+    }
+
+    if (input === SECRET_KEY) {
+        activatePro();
+    } else {
+        alert("❌ Código no válido.");
+    }
+};
 
 document.getElementById('start-learning-btn').onclick = () => {
     document.getElementById('view-intro').classList.add('hidden');
@@ -417,7 +484,7 @@ if (s) {
     completedLevels = d.c || [];
     gems = d.g || 0;
     streak = d.s || 0;
-    isPro = d.p || false;
+    if (d.p) isPro = true;
 }
 
 renderMap();
