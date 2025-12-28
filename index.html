@@ -42,8 +42,9 @@
         <div id="view-map" class="hidden">
             <header class="top-bar-home">
                 <div class="user-stats">
-                    <span class="currency">💎 <span id="gems-count"></span>0</span></span>
+                    <span class="currency">💎 <span id="gems-count">0</span></span>
                     <span class="streak">🔥 <span id="streak-count">0</span></span>
+                    <span id="pro-status-tag" class="pro-tag-mini hidden">PRO</span>
                 </div>
                 <div class="header-actions">
                     <button id="save-btn" class="util-btn" title="Guardar Progreso">💾</button>
@@ -181,6 +182,53 @@
             </footer>
         </div>
 
+    </div>
+
+    <div id="payment-modal" class="modal-pay hidden">
+        <div class="modal-pay-content">
+            <span class="close-modal-pay">&times;</span>
+            <h2>🔓 Suscripción Godot Dojo PRO</h2>
+            <p class="price-tag">OFERTA ESPECIAL: <strong>$3 USD / $3.000 ARS <small>AL MES</small></strong></p>
+            <p>Acceso total a las 160 lecciones, Shaders y UI avanzado durante 30 días.</p>
+
+            <div class="payment-options">
+                <div class="pay-option">
+                    <h3>🇦🇷 Argentina (Mercado Pago)</h3>
+                    <div class="pay-card">
+                        <p>🔥 SUSCRIPCIÓN MENSUAL</p>
+                        <a href="https://mpago.la/1hAUANX" target="_blank" class="mp-btn">💸 Pagar $3.000 ARS</a>
+                        <button onclick="copyMPLink()" class="copy-link">📋 Copiar link para Celular</button>
+                    </div>
+                </div>
+                <div class="pay-option">
+                    <h3>🌍 Internacional (PayPal)</h3>
+                    <div class="pay-card">
+                        <p>CREDIT CARD / PAYPAL</p>
+                        <a href="https://paypal.me/Estebanfederico" target="_blank" class="pp-btn">💳 Pagar $3 USD</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-code-section">
+                <p>¿Ya pagaste o tienes un código?</p>
+                <div id="manual-input-area" class="manual-input-group">
+                    <input type="text" id="manual-code-input" placeholder="Ingresar código aquí...">
+                    <button id="verify-code-btn" class="verify-btn">ACTIVAR</button>
+                </div>
+            </div>
+
+            <div class="pay-instructions">
+                <h3>Cómo funciona la suscripción:</h3>
+                <ul>
+                    <li>El acceso se activa por <b>30 días corridos</b> desde el pago.</li>
+                    <li><b>Mercado Pago:</b> Redirección automática al terminar el pago.</li>
+                    <li><b>PayPal:</b> Envía el comprobante para recibir tu código de mes.</li>
+                </ul>
+                <div class="support-links">
+                    <a href="https://wa.me/5492664024390" target="_blank">📱 Ayuda / Enviar Comprobante</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
