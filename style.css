@@ -35,8 +35,6 @@ body {
     color: var(--text-white);
     font-family: var(--font-main);
     height: 100vh;
-    height: 100dvh;
-    /* Dynamic viewport height for mobile */
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -48,7 +46,6 @@ body {
     width: 100%;
     max-width: 500px;
     height: 100%;
-    height: 100dvh;
     background: var(--bg-app);
     border-left: 1px solid #222;
     border-right: 1px solid #222;
@@ -139,6 +136,44 @@ body {
     opacity: 0.7;
 }
 
+/* Mobile Responsive Improvements for Theory View */
+@media (max-width: 480px) {
+    .theory-header {
+        padding: 1.5rem 1rem 0.8rem;
+    }
+
+    #theory-icon {
+        font-size: 2.5rem;
+    }
+
+    #theory-title {
+        font-size: 1.4rem;
+    }
+
+    .theory-body {
+        font-size: 1rem;
+        padding: 0.8rem 1rem 1.5rem;
+    }
+
+    #theory-code {
+        font-size: 0.9rem;
+    }
+
+    .theory-footer {
+        padding: 1rem;
+    }
+
+    .action-btn {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+
+    .sub-btn {
+        font-size: 1rem;
+        padding: 0.9rem 1.2rem;
+    }
+}
+
 /* Responsive adjustments for Mobile */
 @media (max-width: 480px) {
     #view-intro {
@@ -176,42 +211,6 @@ body {
     .main-cta {
         padding: 1rem !important;
         font-size: 1.1rem !important;
-    }
-
-    /* Lessons / Bottom Bar optimizations */
-    .bottom-bar {
-        padding: 1rem !important;
-        padding-bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
-    }
-
-    .action-btn {
-        padding: 0.8rem !important;
-        font-size: 1rem !important;
-    }
-
-    .lesson-area {
-        padding: 1rem 1rem !important;
-    }
-
-    .question-text {
-        font-size: 1.2rem !important;
-        margin-bottom: 1rem !important;
-        width: 100%;
-        text-align: left;
-    }
-
-    .code-challenge-box {
-        margin-bottom: 1rem !important;
-        padding: 0.8rem !important;
-    }
-
-    .options-grid {
-        gap: 0.5rem !important;
-    }
-
-    .option-btn {
-        padding: 0.6rem 1rem !important;
-        font-size: 0.9rem !important;
     }
 }
 
@@ -747,59 +746,46 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    /* Start from top for long cards */
-    background: rgba(0, 0, 0, 0.85);
+    flex-direction: column;
+    background: var(--bg-app);
     position: absolute;
     top: 0;
     left: 0;
     z-index: 100;
-    padding: 1.5rem;
-    overflow-y: auto;
-    /* Enable scroll if card is tall */
-}
-
-@media (min-height: 700px) {
-    #view-theory {
-        align-items: center;
-        /* Center only if enough height */
-    }
+    overflow: hidden;
 }
 
 .theory-card {
-    background: var(--card-bg);
+    background: var(--bg-app);
     width: 100%;
-    max-width: 420px;
-    border-radius: 24px;
-    padding: 2.5rem 1.5rem;
-    /* Slightly reduced horizontal padding */
-    border: 2px solid var(--border-inactive);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    height: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    animation: fadeInScale 0.3s ease-out;
-    margin: auto 0;
-    /* Helps centering when content is short */
+    animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes fadeInScale {
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
     }
 }
 
 .theory-header {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: 1.2rem;
+    padding: 2rem 1.5rem 1rem;
 }
 
 #theory-icon {
@@ -813,6 +799,9 @@ body {
 }
 
 .theory-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem 1.5rem 2rem;
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text-gray);
@@ -848,10 +837,13 @@ body {
 }
 
 .theory-footer {
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-app);
+    border-top: 2px solid var(--border-inactive);
 }
 
 .sub-btn {
