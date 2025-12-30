@@ -1081,3 +1081,29 @@ body {
 .verify-btn:hover {
     transform: scale(1.05);
 }
+
+/* Fix para visibilidad de botones en móvil */
+@media (max-width: 480px) {
+    .bottom-bar, .theory-footer {
+        padding: 1rem; /* Reducido de 1.5rem */
+    }
+
+    .lesson-area {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .question-text {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .theory-body {
+        font-size: 1rem; /* Un poco más pequeño para que quepa más */
+        line-height: 1.6;
+    }
+
+    #theory-title {
+        font-size: 1.5rem;
+    }
+}
