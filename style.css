@@ -1102,6 +1102,20 @@ body {
         padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     }
 
+    .options-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .option-btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
+    }
+
     .lesson-area {
         padding-top: 1rem;
         padding-bottom: 1rem;
