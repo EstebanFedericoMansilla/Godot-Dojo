@@ -433,9 +433,18 @@ document.getElementById('save-btn').onclick = () => {
 };
 document.getElementById('reset-btn').onclick = () => {
     if (confirm("¿Reiniciar progreso?")) {
-        completedLevels = []; gems = 0; streak = 0; isPro = false;
-        localStorage.removeItem('godotDojoMaster');
-        localStorage.removeItem('godot_dojo_pro_link');
+        // Preserve PRO status
+        const wasPro = isPro;
+
+        // Reset only progress data
+        completedLevels = [];
+        gems = 0;
+        streak = 0;
+
+        // Save with PRO status preserved
+        localStorage.setItem('godotDojoMaster', JSON.stringify({ c: [], g: 0, s: 0, p: wasPro }));
+
+        // Re-render and reload
         renderMap();
         location.reload();
     }
