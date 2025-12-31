@@ -38,6 +38,7 @@ body {
     height: 100dvh;
     height: 100svh;
     width: 100vw;
+    overscroll-behavior: none;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -1097,8 +1098,11 @@ body {
 
 /* Fix para visibilidad de botones en móvil */
 @media (max-width: 480px) {
-    .bottom-bar, .theory-footer {
-        padding: 1rem; /* Reducido de 1.5rem */
+
+    .bottom-bar,
+    .theory-footer {
+        padding: 1rem;
+        /* Reducido de 1.5rem */
         padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     }
 
@@ -1120,14 +1124,15 @@ body {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
-    
+
     .question-text {
         font-size: 1.3rem;
         margin-bottom: 1rem;
     }
 
     .theory-body {
-        font-size: 1rem; /* Un poco más pequeño para que quepa más */
+        font-size: 1rem;
+        /* Un poco más pequeño para que quepa más */
         line-height: 1.6;
     }
 
