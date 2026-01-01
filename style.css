@@ -1048,30 +1048,6 @@ body {
     .pay-instructions {
         padding: 0.6rem;
     }
-
-    .theory-example {
-        font-size: 1.2rem;
-    }
-
-    .theory-example span {
-        font-size: 1.2rem;
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-
-    #theory-code {
-        font-size: 1.25rem;
-        line-height: 1.6;
-    }
-
-    .question-text {
-        font-size: 1.8rem;
-    }
-
-    .code-content {
-        font-size: 1.3rem;
-        line-height: 1.6;
-    }
 }
 
 /* New Styles for Fixes */
@@ -1131,18 +1107,17 @@ body {
     }
 
     .options-grid {
-        flex-wrap: wrap;
-        overflow-x: visible;
-        justify-content: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
     }
 
     .option-btn {
         flex: 0 0 auto;
-        white-space: normal;
-        padding: 0.8rem 10px;
-        font-size: 1rem;
-        min-width: 80px;
-        text-align: center;
+        white-space: nowrap;
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
     }
 
     .lesson-area {
@@ -1156,8 +1131,9 @@ body {
     }
 
     .theory-body {
-        font-size: 1.2rem;
-        line-height: 1.5;
+        font-size: 1rem;
+        /* Un poco más pequeño para que quepa más */
+        line-height: 1.6;
     }
 
     #theory-title {
