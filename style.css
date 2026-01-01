@@ -1060,7 +1060,7 @@ body {
     }
 
     #theory-code {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         line-height: 1.6;
     }
 
@@ -1069,7 +1069,7 @@ body {
     }
 
     .code-content {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         line-height: 1.6;
     }
 }
@@ -1156,7 +1156,7 @@ body {
     }
 
     .theory-body {
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         line-height: 1.5;
     }
 
