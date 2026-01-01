@@ -1048,6 +1048,18 @@ body {
     .pay-instructions {
         padding: 0.6rem;
     }
+.theory-example {
+    font-size: 1.2rem;
+}
+.theory-example span {
+    font-size: 1rem;
+}
+.question-text {
+    font-size: 1.8rem;
+}
+.code-content {
+    font-size: 1.2rem;
+}
 }
 
 /* New Styles for Fixes */
